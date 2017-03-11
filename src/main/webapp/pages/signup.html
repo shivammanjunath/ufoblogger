@@ -1,0 +1,50 @@
+<div class="container">
+
+	<div class="col-md-6 col-md-offset-3">
+
+		<form name="signupForm" ng-submit="sc.signup()" role="form" novalidate>
+
+			<div class="form-group" ng-class="{ 'has-error': signupForm.fullname.$dirty && signupForm.fullname.$error.required }">
+	            <label for="fullname" style="font-size: 19.4px; font-family: 'Josefin Slab'">Full Name</label>
+	            <input type="text" name="fullname" id="fullname" class="form-control" ng-model="sc.fullname" required />
+	            <span ng-show="signupForm.fullname.$dirty && signupForm.fullname.$error.required" class="help-block">Full name is required</span>
+        	</div>
+
+			<div class="form-group" ng-class="{ 'has-error': signupForm.userEmail.$dirty && signupForm.userEmail.$error.required }">
+				<label for="userEmail" style="font-size: 19.4px; font-family: 'Josefin Slab'">Email</label>
+				<input type="email" name="userEmail" id="userEmail" class="form-control" ng-model="sc.email" required/>
+				<span ng-show="signupForm.userEmail.$dirty && signupForm.userEmail.$error.required" class="help-block" style="font-size: 15px; font-family: 'Josefin Slab'">Email is required</span>
+			</div>
+
+			<div class="form-group" ng-class="{ 'has-error': signupForm.userPassword.$dirty && signupForm.userPassword.$error.required }">
+	            <label for="userPassword" style="font-size: 19.4px; font-family: 'Josefin Slab'">Password</label>
+	            <input type="password" name="userPassword" id="userPassword" class="form-control" ng-model="sc.password" ng-minlength="8" required/>
+	            <span ng-show="signupForm.userPassword.$dirty && signupForm.userPassword.$error.required" class="help-block" style="font-size: 15px; font-family: 'Josefin Slab'">Password is required</span>
+	            <span ng-show="signupForm.userPassword.$invalid" class="help-block" style="font-size: 15px; font-family: 'Josefin Slab'">Password must be min 8 characters</span>
+        	</div>
+
+        	<div class="form-group" ng-class="{ 'has-error': signupForm.phone.$dirty && signupForm.phone.$error.required }">
+	            <label for="phone" style="font-size: 19.4px; font-family: 'Josefin Slab'">Phone</label>
+	            <input type="number" name="phone" id="phone" class="form-control" ng-model="sc.phone" required />
+	            <span ng-show="signupForm.phone.$dirty && signupForm.phone.$error.required" class="help-block">Phone number is required</span>
+        	</div>
+
+        	<div class="form-group"  style="padding-top: 15px">
+        		<label for="interest" style="font-size: 19.4px; font-family: 'Josefin Slab'">Interested In</label>
+        		<select id="InterestsList" name="InterestList" style="font-size: 19.4px; font-family: 'Josefin Slab'" ng-model="sc.interest">
+					<option value="technology">Technology</option>
+					<option value="movies">Movies</option>
+					<option value="sports">Sports</option>
+				</select>
+        	</div>
+
+        	<div class="form-actions" style="padding-top: 17px">
+	            <button type="submit" ng-disabled="signupForm.$invalid || sc.verifying" class="btn btn-primary" style="font-size: 18px; font-family: 'Josefin Slab'">Sign Up</button>
+	            <img ng-if="sc.verifying" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+        	</div>
+
+		</form>
+
+	</div>
+
+</div>

@@ -1,0 +1,36 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    padding-top: 90px;
+    padding-bottom: 20px;
+}
+
+.dropdown {
+    cursor:pointer;
+}
+
+a.brand-font {
+	font-family: 'Josefin Slab', serif;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    padding-top: 18px;
+}
+
+a.nav-menu-item {
+	font-family: 'Josefin Slab', serif;
+	color: white; 
+	font-size: 18px;
+	text-decoration: none;
+	font-weight: normal;
+}
+
+.ng-invalid.ng-dirty {
+	border-color: #FF0000;
+}
+
+.ng-valid.ng-dirty {
+	border-color: #00FF00;
+}

@@ -30,6 +30,7 @@ public class AccountNotFoundException extends UFOBloggerException {
 	
 	@Override
 	public Response toResponse(UFOBloggerException exception) {
+		System.out.println("*** AccountNotFoundException ***");
 		return Response.status(500).entity("No account found with e-mail you have provided. Please signup if you have not done already.").type("text/plain").build();
 	}
 

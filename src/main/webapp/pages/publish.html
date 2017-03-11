@@ -1,0 +1,33 @@
+<div class="container">
+
+	<div class="col-sm-8 col-sm-offset-2">
+
+		<form name="publishForm" ng-submit="pc.publish()" role="form" novalidate>
+
+			<label for="title" style="font-size: 19.4px; font-family: 'Josefin Slab'">Title</label>
+			<input type="text" name="title" id="title" class="form-control" ng-model="pc.title" required />
+
+			<div style="padding-top: 12px">
+				<label for="description" style="font-size: 19.4px; font-family: 'Josefin Slab'">Description</label>
+				<textarea id="postText" name="postText" rows="24" class="form-control" ng-model="pc.description"></textarea>
+			</div>
+
+			<div class="form-group"  style="padding-top: 15px">
+        		<label for="interest" style="font-size: 19.4px; font-family: 'Josefin Slab'">Interested In</label>
+        		<select id="InterestsList" name="InterestList" style="font-size: 19.4px; font-family: 'Josefin Slab'" ng-model="sc.interest">
+					<option value="technology">Technology</option>
+					<option value="movies">Movies</option>
+					<option value="sports">Sports</option>
+				</select>
+        	</div>
+
+        	<div class="form-actions" style="padding-top: 17px">
+	            <button type="submit" class="btn btn-primary" style="font-size: 18px; font-family: 'Josefin Slab'">Publish</button>
+	            <img ng-if="pc.verifying" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+        	</div>
+
+		</form>
+
+	</div>
+
+</div>
