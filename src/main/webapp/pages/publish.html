@@ -4,17 +4,24 @@
 
 		<form name="publishForm" ng-submit="pc.publish()" role="form" novalidate>
 
-			<label for="title" style="font-size: 19.4px; font-family: 'Josefin Slab'">Title</label>
-			<input type="text" name="title" id="title" class="form-control" ng-model="pc.title" required />
+			<div class="form-group" ng-class="{ 'has-error': publishForm.title.$dirty && publishForm.title.$error.required }">
+				<label for="title" style="font-size: 19.4px; font-family: 'Josefin Slab'">Title</label>
+				<input type="text" name="title" id="title" class="form-control" ng-model="pc.title" required />
+			</div>
 
-			<div style="padding-top: 12px">
+			<div class="form-group" ng-class="{ 'has-error': publishForm.postText.$dirty && publishForm.postText.$error.required }" style="padding-top: 12px">
 				<label for="description" style="font-size: 19.4px; font-family: 'Josefin Slab'">Description</label>
-				<textarea id="postText" name="postText" rows="24" class="form-control" ng-model="pc.description"></textarea>
+				<textarea id="postText" name="postText" rows="24" class="form-control" ng-model="pc.description" required></textarea>
+			</div>
+
+			<div class="form-group" ng-class="{ 'has-error': publishForm.tags.$dirty && publishForm.tags.$error.required }">
+				<label for="tags" style="font-size: 19.4px; font-family: 'Josefin Slab'">Tags</label>
+				<input type="text" name="tags" id="tags" class="form-control" ng-model="pc.tags" placeholder="example:technology, android etc...." required />
 			</div>
 
 			<div class="form-group"  style="padding-top: 15px">
-        		<label for="interest" style="font-size: 19.4px; font-family: 'Josefin Slab'">Interested In</label>
-        		<select id="InterestsList" name="InterestList" style="font-size: 19.4px; font-family: 'Josefin Slab'" ng-model="sc.interest">
+        		<label for="category" style="font-size: 19.4px; font-family: 'Josefin Slab'">Category</label>
+        		<select id="categoryList" name="categoryList" style="font-size: 19.4px; font-family: 'Josefin Slab'" ng-model="pc.category">
 					<option value="technology">Technology</option>
 					<option value="movies">Movies</option>
 					<option value="sports">Sports</option>
@@ -22,7 +29,7 @@
         	</div>
 
         	<div class="form-actions" style="padding-top: 17px">
-	            <button type="submit" class="btn btn-primary" style="font-size: 18px; font-family: 'Josefin Slab'">Publish</button>
+	            <button type="submit" ng-disabled="publishForm.$invalid || pc.verifying" class="btn btn-primary" style="font-size: 18px; font-family: 'Josefin Slab'">Publish</button>
 	            <img ng-if="pc.verifying" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
         	</div>
 

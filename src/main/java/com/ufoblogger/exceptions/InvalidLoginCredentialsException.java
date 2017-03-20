@@ -5,6 +5,8 @@ import javax.ws.rs.ext.Provider;
 
 @Provider
 public class InvalidLoginCredentialsException extends UFOBloggerException {
+	
+	private Object entityObj;
 
 	public InvalidLoginCredentialsException() {
 		
@@ -27,9 +29,13 @@ public class InvalidLoginCredentialsException extends UFOBloggerException {
 		super(message, cause, enableSuppression, writableStackTrace);
 	}
 	
+	public void setEntity(Object entity) {
+		this.entityObj = entity;
+	}
+	
 	@Override
 	public Response toResponse(UFOBloggerException exception) {
-		return Response.status(500).entity("Invalid login details, please confirm your e-mail and password!").type("text/plain").build();
+		return Response.status(500).entity(entityObj).type("text/plain").build();
 	}
 
 }

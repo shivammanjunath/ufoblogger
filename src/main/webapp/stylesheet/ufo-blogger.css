@@ -34,3 +34,29 @@ a.nav-menu-item {
 .ng-valid.ng-dirty {
 	border-color: #00FF00;
 }
+
+li.white-in-color {
+	color: #FFFFFF;
+}
+
+.post-title {
+  font-family: 'Josefin Slab', serif;
+  font-size: 27px;
+  margin-top: 30px;
+  margin-bottom: 12px;
+}
+
+.post-meta {
+  font-family: 'Josefin Slab', serif;
+  color: #808080;
+  font-size: 15px;
+  margin-top: 0;
+}
+
+.post-subtitle {
+  font-family: 'Josefin Slab', serif;
+  margin: 0;
+  font-size: 24px;
+  margin-bottom: 18px;
+  color: black;
+}

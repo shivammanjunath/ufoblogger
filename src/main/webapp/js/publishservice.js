@@ -2,29 +2,25 @@
 	'use strict';
 	
 	angular.module('ufoblogger')
-		.service('Publish', 
+		.service('PublishService', 
 			function($http) {
-				var publishService = {};
+				
+				this.publish = function Publish(title, description, category, author, tags, callback) {
 
-				publishService.publish = Publish;
-				
-				return publishService;
-				
-				function Publish(title, description, category, author, callback) {
-					
 					$http.post('/ufoblogger/web/publish/new', 
 						{
-							title: title, 
+							title: title,
+							authorId: author,
 							category: category, 
-							description: description, 
-							authorId: author
+							description: description,
+							tags: tags
 						})
 						.success(function (response) {
-							console.log("LoginService - handleSuccess");
+							console.log("PublishService - handleSuccess");
 							callback(response);
 						})
 						.error(function (response) {
-							console.log("LoginService - handleError");
+							console.log("PublishService - handleError");
 							callback(response);
 						});
 				}

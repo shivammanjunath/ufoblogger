@@ -25,7 +25,7 @@
 
         	<div class="form-group" ng-class="{ 'has-error': signupForm.phone.$dirty && signupForm.phone.$error.required }">
 	            <label for="phone" style="font-size: 19.4px; font-family: 'Josefin Slab'">Phone</label>
-	            <input type="number" name="phone" id="phone" class="form-control" ng-model="sc.phone" required />
+	            <input type="number" name="phone" id="phone" class="form-control" ng-model="sc.phone" tabindex="1" required />
 	            <span ng-show="signupForm.phone.$dirty && signupForm.phone.$error.required" class="help-block">Phone number is required</span>
         	</div>
 
@@ -44,6 +44,14 @@
         	</div>
 
 		</form>
+
+		<div ng-hide="signedup" style="padding-top: 12px">
+        	<span class="help-block" style="font-size: 19.8px; font-family: 'Josefin Slab'; color: red; font-style: bold">{{signupErrorMessage}}</span>
+        </div>
+
+        <div ng-show="signedup" style="padding-top: 12px">
+        	<span class="help-block" style="font-size: 19.8px; font-family: 'Josefin Slab'; color: green; font-style: bold">{{signupErrorMessage}}</span>
+        </div>
 
 	</div>
 

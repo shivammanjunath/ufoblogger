@@ -16,4 +16,7 @@ public interface IUserActivity {
 	
 	List<Article> fetchArticles(String type);
 
+	void writeArticle(Article article);
+	
+	void updateUserInfo(String fullName, String _id);
 }

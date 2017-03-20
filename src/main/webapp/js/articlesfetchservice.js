@@ -4,21 +4,13 @@
 	angular.module('ufoblogger')
 		.service('ArticlesFetchService', function($http) {
 
-			var service = {};
-
-			service.fetchAllArticles = FetchAllArticles;
-
-			return service;
-
-			function FetchAllArticles() {
+			this.fetchAllArticles = function FetchAllArticles() {
 				console.log("FetchAllArticles");
-				//return $http.get('http://localhost:8080/ufoblogger/web/readarticles/public').then(handleSuccess, handleError);
 				return $http.get('/ufoblogger/web/readarticles/public').then(handleSuccess, handleError);
 			}
 
-
 			function handleSuccess(response) {
-	            console.log("handleSuccess");
+	            console.log("handleSuccess" + response.data);
 	            return response.data;
         	}
  

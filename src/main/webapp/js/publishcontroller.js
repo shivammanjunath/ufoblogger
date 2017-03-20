@@ -4,30 +4,28 @@
 	angular.module('ufoblogger')
 		.controller('PublishController', PublishController);
 	
-	PublishController.$inject = ['PublishService', '$location'];
+	PublishController.$inject = ['PublishService', '$location', '$window', '$scope'];
 			
-	function PublishController(PublishService, $location) {
+	function PublishController(PublishService, $location, $window, $scope) {
 		
 		var pc = this;
 		
-		pc.publish = Publish;
-		
-		(function init() {
-			
-		})();
-		
-		function Publish() {
+		this.publish = function Publish() {
 			pc.verifying = true;
 			
 			PublishService.publish(
 				pc.title,
-				pc.category, 
 				pc.description,
-				pc.author,
-				pc.datetime,
+				pc.category, 
+				$window.sessionStorage.getItem("_id"),
+				pc.tags,
 				function (response) {
 
 					if ( response.publishStatus ) {
+						$scope.title = "";
+						$scope.description = "";
+						$scope.tags = "";
+						$location.path('/');
 					} else {
 					}
 					

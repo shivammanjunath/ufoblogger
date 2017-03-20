@@ -3,16 +3,11 @@
 	
 	angular.module('ufoblogger')
 		.service('LoginService', 
-			function($http, $window) {
-				var loginService = {};
-
-				loginService.performLogin = PerformLogin;
-				loginService.saveLoginData = SaveLoginData;
+			function($http, $window, $rootScope) {
 				
-				return loginService;
-				
-				function PerformLogin(userEmail, userPassword, callback) {
+				this.performLogin = function PerformLogin(userEmail, userPassword, callback) {
 					console.log("*** Perform login with " + userEmail + " & " + userPassword + " ***");
+					$rootScope.userEmail = userEmail;
 					$http.post('/ufoblogger/web/signin/user', {loginEmail: btoa(userEmail), loginPassword: btoa(userPassword)})
 						.success(function (response) {
 							console.log("LoginService - handleSuccess");
@@ -20,15 +15,17 @@
 						})
 						.error(function (response) {
 							console.log("LoginService - handleError");
+							$rootScope.userEmail = "";
 							callback(response);
 						});
 				}
 
-				function SaveLoginData(loginData) {
+				this.saveLoginData = function SaveLoginData(loginData) {
 					$window.sessionStorage.setItem("_id", loginData._id);
-					$window.sessionStorage.setItem("userFullName", loginData.userFullName);
+					$window.sessionStorage.setItem("userFullName", atob(loginData.userFullName));
 					$window.sessionStorage.setItem("userInterest", loginData.userInterest);
 					$window.sessionStorage.setItem("userToken", loginData.userToken);
+					$rootScope.currentUser = $window.sessionStorage.getItem("userFullName");
 				}
 				
 			}
