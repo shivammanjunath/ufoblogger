@@ -7,6 +7,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.ufoblogger.api.SearchQuery;
+import com.ufoblogger.logic.ReadArticles;
 
 @Path("readarticles")
 public class ArticlesReading {
@@ -20,9 +21,11 @@ public class ArticlesReading {
 	@Path("/public")
 	public Response fetchHomePageArticles() {
 		
-		System.out.println("****** REQUEST RECEIVED AT THE SERVER ******");
+		System.out.println("****** REQUEST RECEIVED AT THE SERVER fetchHomePageArticles ******");
 		
-		return Response.ok().entity("OK").build();
+		ReadArticles readArticles = new ReadArticles();
+		
+		return Response.ok().entity(readArticles.getAllArticles()).build();
 	}
 
 }

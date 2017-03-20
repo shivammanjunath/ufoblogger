@@ -1,0 +1,15 @@
+<div class="container">
+
+	<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+		<h4 class="post-title">
+			<a style="color: dodgerblue">{{ selectedPost.title }}</a>
+		</h4>
+
+		<p class="post-meta">Posted by {{selectedPost.authorFullName}} on {{ selectedPost.dateTime | date:'dd MMM yyyy, HH:mm'}}, {{selectedPost.category}}</p>
+
+		<p class="post-subtitle">{{ selectedPost.description }}</p>
+		
+	</div>
+
+</div>

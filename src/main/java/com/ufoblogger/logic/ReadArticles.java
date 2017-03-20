@@ -11,6 +11,7 @@ import org.bson.types.ObjectId;
 import com.mongodb.client.model.Filters;
 import com.ufoblogger.api.Article;
 import com.ufoblogger.api.SearchQuery;
+import com.ufoblogger.handler.UserActivity;
 
 public class ReadArticles {
 	
@@ -19,6 +20,10 @@ public class ReadArticles {
 	public ReadArticles() {
 	}
 
+	public List<Article> getAllArticles() {
+		return UserActivity.getInstance().fetchArticles("");
+	}
+	
 	public List<Article> fetchArticles(SearchQuery query) {
 		List<Article> articles = new ArrayList<>();
 		

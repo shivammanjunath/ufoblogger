@@ -18,7 +18,7 @@ public class ValidateSignup {
 		SignUpInfo singupInfo;
 		
 		if ( status == 0 ) {
-			singupInfo = new SignUpInfo(true, "");
+			singupInfo = new SignUpInfo(true, "Signed up successfully, you can login now!");
 		} else {
 			singupInfo = new SignUpInfo(false, "Account already exists, please Login!");
 		}

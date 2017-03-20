@@ -2,18 +2,10 @@
 <html lang="en-US" >
 
 	<head>
-		<!--
-		<link href="stylesheet/bootstrap.3.3.7.min.css" rel="stylesheet" type="text/css">
-		<link href="stylesheet/font-awesome.4.1.0.min.css" rel="stylesheet" type="text/css"> -->
+		
 		<link href="stylesheet/font-josefin.css" rel="stylesheet" type="text/css">
 		<link href="stylesheet/ufo-blogger.css" rel="stylesheet" type="text/css">
-		<!--
-		<script src="script/angular.1.4.8.min.js"></script>
-		<script src="script/angular-route.1.4.8.min.js"></script>
-		<script src="script/jquery.3.1.1.min.js"></script>
-		<script src="script/bootstrap.3.3.7.min.js"></script>
-		-->
-		
+				
 		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 		<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 		<link href="https://fonts.googleapis.com/css?family=Roboto:400,500|Inconsolata:400,700" rel="stylesheet" type="text/css">
@@ -56,8 +48,8 @@
 
 				<div class="collapse navbar-collapse ufoNavBar">
 
-					<ul class="nav navbar-nav" style="padding-top: 5px">
-
+					<ul class="nav navbar-nav" style="margin-top: 5px">
+<!--
 						<li class="dropdown">
 					        <a class="dropdown-toggle" data-toggle="dropdown" style="color: #FFFFFF; font-size: 21px; font-family: 'Josefin Slab'">Category <span class="caret"></span></a>
 					        <ul class="dropdown-menu">
@@ -67,8 +59,8 @@
 					          <li><a href="#/sports">Sports</a></li>
 					        </ul>
 				      	</li>
-
-						<li ng-show="authenticated">
+-->
+						<li ng-if="authenticated">
 							<a href="#/publish" style="color: #FFFFFF; font-size: 21px; font-family: 'Josefin Slab'">New Post</a>
 						</li>
 
@@ -78,18 +70,28 @@
 
 					</ul>
 
-					<ul class="nav navbar-nav navbar-right" ng-hide="authenticated">
+					<ul class="nav navbar-nav navbar-right" ng-hide="authenticated" style="margin-top: 5px">
 
 						<li>
-							<a href="#/login" style="color: #FFFFFF; font-size: 21px; font-family: 'Josefin Slab'">
+							<a href="#/login" style="color: #FFFFFF; font-size: 21px; font-family: 'Josefin Slab';">
 							<span class="glyphicon glyphicon-log-in"></span> Login</a>
 						</li>
 
 						<li>
-							<a href="#/signup" ng-click="navBarOptions.selectOption(5)" style="color: #FFFFFF; font-size: 21px; font-family: 'Josefin Slab'">
+							<a href="#/signup" ng-click="navBarOptions.selectOption(5)" style="color: #FFFFFF; font-size: 21px; font-family: 'Josefin Slab';">
 							<span class="glyphicon glyphicon-user"></span> Sign Up</a>
 						</li>
 						
+					</ul>
+
+					<ul class="nav navbar-nav navbar-right" ng-if="authenticated">
+						<li class="dropdown">
+					        <a class="dropdown-toggle" data-toggle="dropdown" style="color: #FFFFFF; font-size: 18px; font-family: 'Josefin Slab'; margin-top: 5px"><span class="glyphicon glyphicon-user"></span> {{currentUser}} <span class="caret"></span></a>
+					        <ul class="dropdown-menu" style="font-family: 'Josefin Slab'; font-size: 16.5px">
+					          <li><a href="#/profile">Profile</a></li>
+					          <li><a href="#/logout">Logout</a></li>
+					        </ul>
+			      		</li>
 					</ul>
 				</div>
 			
@@ -105,12 +107,16 @@
 		<script src="js/loginservice.js" type="text/javascript"></script>
 		<script src="js/signupservice.js" type="text/javascript"></script>
 		<script src="js/publishservice.js" type="text/javascript"></script>
+		<script src="js/profileservice.js" type="text/javascript"></script>
 
 		<!-- Controllers -->
 		<script src="js/allarticlescontroller.js" type="text/javascript"></script>
 		<script src="js/logincontroller.js" type="text/javascript"></script>
 		<script src="js/signupcontroller.js" type="text/javascript"></script>
 		<script src="js/publishcontroller.js" type="text/javascript"></script>
+		<script src="js/logoutcontroller.js" type="text/javascript"></script>
+		<script src="js/updateprofilecontroller.js" type="text/javascript"></script>
+		<script src="js/singlepostcontroller.js" type="text/javascript"></script>
 	</body>
 	
 </html>

@@ -49,6 +49,28 @@
 			      controllerAs: 'search'
 			    })
 
+		    .when('/logout',
+			    {
+			    	templateUrl: '',
+			    	controller: 'LogoutController',
+			    	controllerAs: 'loc'
+			    })
+
+		    .when('/profile',
+			    {
+			    	templateUrl: 'pages/update.html',
+			    	controller: 'ProfileController',
+			    	controllerAs: 'puc'
+			    })
+
+		    .when('/singlePost',
+			    {
+			    	templateUrl: 'pages/singlearticle.html',
+			    	controller: 'SinglePostController',
+			    	controllerAs: 'spc'
+			    })
+
+/*
 		    .when('/allposts',
 			    {
 			    	templateUrl:    'pages/allarticles.html',
@@ -80,7 +102,7 @@
 			      	controllerAs: 'sports'
 			    	
 			    })
-
+*/
 	    	.otherwise(
 			    {
 			      redirectTo:     '/',
@@ -91,7 +113,7 @@
 	ufobloggerapp.controller('SearchController', function ($scope, $compile) {
 		console.log('SearchController');
 	});
-
+/*
 	ufobloggerapp.controller('TechnologyController', function ($scope, $compile) {
 		console.log('TechnologyController');
 	});
@@ -103,9 +125,15 @@
 	ufobloggerapp.controller('SportsController', function ($scope, $compile) {
 		console.log('SportsController');
 	});
-
-	ufobloggerapp.run(['$rootScope', function($rootScope) {
+*/
+	ufobloggerapp.run(['$rootScope', '$window', function($rootScope, $window) {
+		$rootScope.currentUser = $window.sessionStorage.getItem("userFullName");
+		$rootScope.userEmail = "";
+		$rootScope.signedup = false;
 	    $rootScope.authenticated = false;
+	    $rootScope.loginErrorMessage = "";
+	    $rootScope.signupErrorMessage = "";
+	    $rootScope.selectedPost = null;
 	}]);
 
 })();

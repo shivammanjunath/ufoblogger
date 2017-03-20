@@ -33,12 +33,15 @@ public class Login {
 		
 		if ( userInfo.getUserToken().equals("Invalid Password") ) {
 			userInfo.setErrorMessage("Invalid login credentials!");
-			//throw new InvalidLoginCredentialsException();
+			InvalidLoginCredentialsException excp = new InvalidLoginCredentialsException();
+			excp.setEntity(userInfo);
+			throw excp;
 		} else if ( userInfo.getUserToken() == "" ) {
 			userInfo.setErrorMessage("Account not found, signup to create a new account");
 			//throw new AccountNotFoundException();
 		}
 
+		
 		return Response.ok().entity(userInfo).build();
 	}
 

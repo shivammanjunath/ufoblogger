@@ -14,7 +14,7 @@
 					
 					$http.post('/ufoblogger/web/signup/user', 
 						{
-							userFullName: fullname,
+							userFullName: btoa(fullname),
 							userEmail: btoa(email), 
 							loginPassword: btoa(password),
 							userPhoneNumber: btoa(phone),

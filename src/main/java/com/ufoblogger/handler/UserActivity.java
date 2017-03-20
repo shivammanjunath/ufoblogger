@@ -1,26 +1,26 @@
 package com.ufoblogger.handler;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.Calendar;
 import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.security.auth.login.AccountException;
 
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
 import com.mongodb.MongoClient;
+import com.mongodb.MongoException;
+import com.mongodb.MongoWriteConcernException;
+import com.mongodb.MongoWriteException;
+import com.mongodb.client.AggregateIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.ufoblogger.api.Article;
 import com.ufoblogger.api.BlogUser;
 import com.ufoblogger.api.LoginData;
-import com.ufoblogger.exceptions.AccountExists;
 
 public class UserActivity implements ILocalOperations {
 	
@@ -58,7 +58,32 @@ public class UserActivity implements ILocalOperations {
 
 	@Override
 	public List<Article> fetchArticles(String type) {
-		return null;
+		collection = mongoDatabase.getCollection(MONGO_DB_COLLECTION_ARTICLES);
+		AggregateIterable<Document> articles;
+		articles = collection.aggregate(Arrays.asList(
+				new Document("$sort", new Document("datetime", -1))));
+		
+		List<Article> articlesList = new ArrayList<>();
+		for (Document document : articles) {
+			Article newArticle = new Article();
+			newArticle.set_id(document.get("_id").toString());
+			newArticle.setAuthorId(document.get("author_id").toString());
+			newArticle.setCategory(document.getString("category"));
+			newArticle.setDateTime(document.getLong("datetime"));
+			newArticle.setDescription(document.getString("description"));
+			newArticle.setTitle(document.getString("title"));
+			newArticle.setTags(document.getString("tags"));
+			
+			String fullName = "";
+			Document nameDocument = findUserById(newArticle.getAuthorId());
+			if ( nameDocument != null) {
+				fullName = nameDocument.getString("fullname");
+			}
+			newArticle.setAuthorFullName(fullName);
+			
+			articlesList.add(newArticle);
+		}
+		return articlesList;
 	}
 
 	@Override
@@ -82,13 +107,37 @@ public class UserActivity implements ILocalOperations {
 		return addStatus;
 	}
 	
+	@Override
 	public void writeArticle(Article article) {
 		collection = mongoDatabase.getCollection(MONGO_DB_COLLECTION_ARTICLES);
 		collection.insertOne(new Document()
 				.append("title", article.getTitle())
 				.append("datetime", article.getDateTime())
-				.append("author_id", new ObjectId(article.getAuthor()))
+				.append("author_id", new ObjectId(article.getAuthorId()))
+				.append("description", article.getDescription())
+				.append("category", article.getCategory())
+				.append("tags", article.getTags())
 				);
+	}
+	
+	@Override
+	public void updateUserInfo(String fullName, String _id) {
+		System.out.println("*** User activity updateUser " + fullName + " id : " + _id);
+		collection = mongoDatabase.getCollection(MONGO_DB_COLLECTION_USERS);
+		
+		Bson filter = new Document().append("_id", new ObjectId(_id));
+		Bson update = new Document()
+				.append("fullname", fullName);
+				
+		try {
+			collection.updateOne(filter, update);
+		} catch (MongoWriteException excp) {
+			System.out.println("" + excp.getMessage());
+		} catch (MongoWriteConcernException excp ) {
+			System.out.println("" + excp.getMessage());
+		} catch (MongoException excp) {
+			System.out.println("" + excp.getMessage());
+		}
 	}
 	
 	@Override
@@ -114,6 +163,16 @@ public class UserActivity implements ILocalOperations {
 				.first();
 	}
 	
+	private Document findUserById(String id) {
+		MongoCollection<Document> tempCollection = mongoDatabase.getCollection(MONGO_DB_COLLECTION_USERS);
+		Bson filter = new Document("_id", new ObjectId(id));
+		Bson projection = new Document()
+				.append("email",0)
+				.append("phone", 0)
+				.append("interest", 0)
+				.append("password", 0);
+		return tempCollection.find(filter).projection(projection).first();
+	}
 	
 	private String tokenEncoder(String toEncode) {
 		String encoded = "";

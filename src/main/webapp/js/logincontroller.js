@@ -10,13 +10,12 @@
 		
 		var lc = this;
 		
-		lc.login = Login;
-		
 		(function init() {
-			
+			$rootScope.loginErrorMessage = "";
+			$rootScope.authenticated = false;
 		})();
 		
-		function Login() {
+		this.login = function Login() {
 			lc.verifying = true;
 
 			console.log("LoginController.login()");
@@ -26,11 +25,13 @@
 					if ( response.loginStatus ) {
 						LoginService.saveLoginData(response);
 						$rootScope.authenticated = true;
+						$rootScope.loginErrorMessage = "";
 						$location.path('/');
+						
 					} else {
 						console.log(response.errorMessage);
 						$rootScope.authenticated = false;
-						lc.responseMessage = response.errorMessage;
+						$rootScope.loginErrorMessage = response.errorMessage;
 					}
 					
 					lc.verifying = false;

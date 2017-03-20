@@ -4,16 +4,16 @@
 	angular.module('ufoblogger')
 		.controller('SignUpController', SignUpController);
 	
-	SignUpController.$inject = ['SignUpService', '$location'];
+	SignUpController.$inject = ['SignUpService', '$location', '$rootScope'];
 			
-	function SignUpController(SignUpService, $location) {
+	function SignUpController(SignUpService, $location, $rootScope) {
 		
 		var sc = this;
 		
 		sc.signup = Signup;
 		
 		(function init() {
-			
+			$rootScope.signupErrorMessage = "";
 		})();
 		
 		function Signup() {
@@ -30,9 +30,11 @@
 					console.log(response.errorMessage);
 					
 					if ( response.signupStatus ) {
-						sc.responseMessage = "";
+						$rootScope.signedup = true;
+						$rootScope.signupErrorMessage = response.errorMessage;
 					} else {
-						sc.responseMessage = response.errorMessage;
+						$rootScope.signedup = false;
+						$rootScope.signupErrorMessage = response.errorMessage;
 					}
 					
 					sc.verifying = false;
